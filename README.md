@@ -1,40 +1,34 @@
-🛒 Projeto E-commerce API
+# 🛒 Projeto E-commerce API
 
-API RESTful desenvolvida com Spring Boot para gerenciamento de um sistema de e-commerce.
+API RESTful desenvolvida com **Spring Boot** para gerenciamento de um sistema de e-commerce.
 
 O projeto possui:
 
-👤 Usuários
+- 👤 Usuários
+- 📦 Produtos
+- 🏷️ Categorias
+- 🧾 Pedidos
+- 💳 Pagamentos
+- 🔐 Controle de perfis (ADMIN / USER)
 
-📦 Produtos
+---
 
-🏷️ Categorias
+## 🧱 Tecnologias Utilizadas
 
-🧾 Pedidos
+- Java 17+
+- Spring Boot
+- Spring Data JPA
+- Hibernate
+- Lombok
+- H2 / PostgreSQL
+- Maven
+- Postman (para testes)
 
-💳 Pagamentos
+---
 
-🔐 Controle de perfis (ADMIN / USER)
+## 📂 Estrutura do Projeto
 
-🧱 Tecnologias Utilizadas
-
-Java 17+
-
-Spring Boot
-
-Spring Data JPA
-
-Hibernate
-
-Lombok
-
-H2 / PostgreSQL
-
-Maven
-
-Postman (para testes)
-
-📂 Estrutura do Projeto
+```
 com.projeto.ecommerce
 │
 ├── entities
@@ -43,12 +37,20 @@ com.projeto.ecommerce
 ├── services
 ├── controllers
 └── enums
-🔎 Endpoints da API
-👤 Usuários
-📌 Criar usuário
+```
 
-POST /users
 
+---
+
+# 🔎 Endpoints da API
+
+## 👤 Usuários
+
+### 📌 Criar usuário
+
+**POST** `/users`
+
+```json
 {
   "name": "Gabriel",
   "email": "gabriel@email.com",
@@ -56,15 +58,17 @@ POST /users
   "password": "123456",
   "roles": "USER"
 }
-📌 Buscar usuário por ID
+```
+### 📌 Buscar usuário por ID
 
-GET /users/{id}
+**GET** `/users/{id}`
 
-📦 Produtos
-📌 Criar produto
+---
+## 📦 Produtos
+### 📌 Criar produto
 
-POST /products
-
+**POST** `/products`
+```
 {
   "name": "Notebook Gamer",
   "description": "RTX 4060, 16GB RAM",
@@ -72,77 +76,94 @@ POST /products
   "imgURL": "https://imagem.com/notebook.jpg",
   "categoriesIds": ["uuid-da-categoria"]
 }
-📌 Listar produtos
+```
+### 📌 Listar produtos
 
-GET /products
+**GET** `/products`
 
-🏷️ Categorias
-📌 Criar categoria
+---
+## 🏷️ Categorias
+### 📌 Criar categoria
 
-POST /categories
-
+**POST** `/categories`
+```
 {
   "name": "Eletrônicos"
 }
-🧾 Pedidos
-📌 Criar pedido
+```
 
-POST /orders
+---
+## 🧾 Pedidos
+### 📌 Criar pedido
 
+**POST** `/orders`
+```
 {
   "status": "AWAITING_PAYMENT",
   "clientId": "uuid-do-usuario"
 }
-💳 Pagamento
-📌 Registrar pagamento
+```
 
-POST /payments
+---
+## 💳 Pagamento
+### 📌 Registrar pagamento
 
+**POST** `/payments`
+```
 {
   "orderId": "uuid-do-pedido"
 }
-🖼️ Testes no Postman
-🔹 Criando Usuário
-🔹 Criando Produto
-🔹 Criando Pedido
-🗄️ Modelo de Banco de Dados
-Principais Relacionamentos:
+```
 
-Um Usuário pode ter vários Pedidos
+---
+## 🖼️ Prints do Postman
+### Criando Usuário:
 
-Um Pedido possui um Pagamento
+### Criando Produto:
 
-Um Produto pode ter várias Categorias
+### Criando Pedido:
 
-Categoria e Produto possuem relacionamento Many-to-Many
+---
+## 🗄️ Modelo de Banco de Dados
+### Principais Relacionamentos:
 
-▶️ Como Rodar o Projeto
-# Clonar o projeto
+- Um Usuário pode ter vários Pedidos
+- Um Pedido possui um Pagamento
+- Um Produto pode ter várias Categorias
+- Produto e Categoria possuem relacionamento Many-to-Many
+
+---
+# ▶️ Como Rodar o Projeto
+
+## Clone o projeto em um local:
+```
 git clone https://github.com/seu-usuario/seu-repositorio.git
+```
 
-# Entrar na pasta
+## Entre na pasta:
+```
 cd ecommerce
+```
 
-# Rodar aplicação
+## Rodar aplicação
+```
 ./mvnw spring-boot:run
+```
 
-A API estará disponível em:
-
+## A API estará disponível em:
+```
 http://localhost:8080
-🧠 Melhorias Futuras
+```
 
-Implementar autenticação com JWT
+## 🧠 Melhorias Futuras:
 
-Adicionar OrderItem
+- Implementar autenticação com JWT
+- Adicionar OrderItem
+- Implementar paginação
+- Criar documentação com Swagger
+- Implementar validações com Bean Validation
+- Deploy em produção (Render / Railway / AWS)
 
-Implementar paginação
+## 👨‍💻 Autor
 
-Criar documentação com Swagger
-
-Implementar validações com Bean Validation
-
-Deploy em produção (Render / Railway / AWS)
-
-👨‍💻 Autor
-
-Projeto desenvolvido para fins acadêmicos e prática com Spring Boot.
+Projeto desenvolvido por BielVereda.
