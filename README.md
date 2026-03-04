@@ -15,7 +15,7 @@ O projeto possui:
 
 ## 🧱 Tecnologias Utilizadas
 
-- Java 17+
+- Java 25
 - Spring Boot
 - Spring Data JPA
 - Hibernate
