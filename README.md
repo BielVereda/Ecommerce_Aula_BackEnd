@@ -1,28 +1,33 @@
-# 🛒 Projeto E-commerce API
+# 🛒 E-commerce API
 
 API RESTful desenvolvida com **Spring Boot** para gerenciamento de um sistema de e-commerce.
 
-O projeto possui:
+Este projeto implementa um backend completo com operações CRUD, relacionamentos entre entidades e estrutura organizada seguindo boas práticas de desenvolvimento.
 
-- 👤 Usuários
-- 📦 Produtos
-- 🏷️ Categorias
-- 🧾 Pedidos
-- 💳 Pagamentos
-- 🔐 Controle de perfis (ADMIN / USER)
+---
+
+## 🚀 Funcionalidades
+
+* 👤 Gerenciamento de usuários
+* 📦 Gerenciamento de produtos
+* 🏷️ Categorias de produtos
+* 🧾 Criação e controle de pedidos
+* 💳 Registro de pagamentos
+* 🔐 Controle de perfis (ADMIN / USER)
+* 🔄 CRUD completo (Create, Read, Update, Delete)
 
 ---
 
 ## 🧱 Tecnologias Utilizadas
 
-- Java 25
-- Spring Boot
-- Spring Data JPA
-- Hibernate
-- Lombok
-- H2 / PostgreSQL
-- Maven
-- Postman (para testes)
+* Java 17+
+* Spring Boot
+* Spring Data JPA
+* Hibernate
+* Lombok
+* H2 / PostgreSQL
+* Maven
+* Postman
 
 ---
 
@@ -31,20 +36,29 @@ O projeto possui:
 ```
 com.projeto.ecommerce
 │
+├── controllers
+├── services
+├── repositories
 ├── entities
 ├── dtos
-├── repositories
-├── services
-├── controllers
 └── enums
 ```
 
+---
+
+## 🌐 Base URL
+
+```
+http://localhost:8080
+```
 
 ---
 
 # 🔎 Endpoints da API
 
-## 👤 Usuários
+---
+
+## 👤 Usuários (`/users`)
 
 ### 📌 Criar usuário
 
@@ -59,112 +73,284 @@ com.projeto.ecommerce
   "roles": "USER"
 }
 ```
-<img width="1494" height="587" alt="image" src="https://github.com/user-attachments/assets/fc634616-2460-4fd7-a4cb-6fb853df74ce" />
-
-### 📌 Buscar usuário por ID
-
-**GET** `/users/{id}`
-<img width="1475" height="497" alt="image" src="https://github.com/user-attachments/assets/219f0641-0c1d-4092-8888-8687e4729699" />
+![post_users.png](images/users/post_users.png)
 
 ---
-## 📦 Produtos
+
+### 📌 Listar usuários
+
+**GET** `/users`
+![get_users.png](images/users/get_users.png)
+---
+
+### 📌 Atualizar usuário
+
+**PUT** `/users/{id}`
+
+```json
+{
+  "name": "Novo Nome",
+  "email": "novo@email.com",
+  "phone": "111111111",
+  "roles": "ADMIN"
+}
+```
+![put_users_id.png](images/users/put_users_id.png)
+---
+
+### 📌 Deletar usuário
+
+**DELETE** `/users/{id}`
+![delete_users.png](images/users/delete_users.png)
+---
+
+## 📦 Produtos (`/products`)
+
 ### 📌 Criar produto
 
 **POST** `/products`
-```
+
+```json
 {
   "name": "Notebook Gamer",
   "description": "RTX 4060, 16GB RAM",
-  "price": 7500.00,
+  "price": 7500,
   "imgURL": "https://imagem.com/notebook.jpg",
   "categoriesIds": ["uuid-da-categoria"]
 }
 ```
-<img width="1494" height="587" alt="image" src="https://github.com/user-attachments/assets/5de7dead-4144-44d1-80a7-0cd1f68a3f90" />
+![post_products.png](images/products/post_products.png)
+---
 
 ### 📌 Listar produtos
 
 **GET** `/products`
-<img width="1475" height="497" alt="image" src="https://github.com/user-attachments/assets/d2aad5f2-c760-4099-aa45-6b527e0fbbaf" />
-
+![get_products.png](images/products/get_products.png)
 ---
-## 🏷️ Categorias
+
+### 📌 Buscar por ID
+
+**GET** `/products/{id}`
+![get_products_id.png](images/products/get_products_id.png)
+---
+
+### 📌 Atualizar produto
+
+**PUT** `/products/{id}`
+
+```json
+{
+  "name": "Produto Atualizado",
+  "description": "Nova descrição",
+  "price": 999.99,
+  "imgURL": "url",
+  "categoriesIds": []
+}
+```
+![put_products_id.png](images/products/put_products_id.png)
+---
+
+### 📌 Deletar produto
+
+**DELETE** `/products/{id}`
+![delete_products.png](images/products/delete_products.png)
+---
+
+## 🏷️ Categorias (`/categories`)
+
 ### 📌 Criar categoria
 
 **POST** `/categories`
-```
+
+```json
 {
   "name": "Eletrônicos"
 }
 ```
-<img width="1494" height="406" alt="image" src="https://github.com/user-attachments/assets/6c3b9a77-b2e6-4d69-af2b-654e5df1ad65" />
-
+![post_categories.png](images/categories/post_categories.png)
 ---
-## 🧾 Pedidos
+
+### 📌 Listar categorias
+
+**GET** `/categories`
+![get_categories.png](images/categories/get_categories.png)
+---
+
+### 📌 Buscar por ID
+
+**GET** `/categories/{id}`
+![get_categories_id.png](images/categories/get_categories_id.png)
+---
+
+### 📌 Atualizar categoria
+
+**PUT** `/categories/{id}`
+
+```json
+{
+  "name": "Nova Categoria"
+}
+```
+![put_categories_id.png](images/categories/put_categories_id.png)
+---
+
+### 📌 Deletar categoria
+
+**DELETE** `/categories/{id}`
+![delete_categories.png](images/categories/delete_categories.png)
+---
+
+## 🧾 Pedidos (`/orders`)
+
 ### 📌 Criar pedido
 
 **POST** `/orders`
-```
+
+```json
 {
   "status": "AWAITING_PAYMENT",
   "clientId": "uuid-do-usuario"
 }
 ```
-<img width="1494" height="500" alt="image" src="https://github.com/user-attachments/assets/5ae9347f-13ce-472b-b1ae-3e5e74a6de9e" />
-
+![post_orders.png](images/orders/post_orders.png)
 ---
-## 💳 Pagamento
-### 📌 Registrar pagamento
 
-**POST** `/payments`
-```
+### 📌 Listar pedidos
+
+**GET** `/orders`
+![get_orders.png](images/orders/get_orders.png)
+---
+
+### 📌 Buscar por ID
+
+**GET** `/orders/{id}`
+![get_orders_id.png](images/orders/get_orders_id.png)
+---
+
+### 📌 Atualizar pedido
+
+**PUT** `/orders/{id}`
+
+```json
 {
-  "orderId": "uuid-do-pedido"5cc4b4ee-69f0-460e-898c-46a79fb58d68
+  "status": "PAID",
+  "clientId": "uuid-do-usuario"
 }
 ```
-<img width="1475" height="423" alt="image" src="https://github.com/user-attachments/assets/95c70be4-c3e1-4534-9bb9-8515774485cc" />
+![put_orders_id.png](images/orders/put_orders_id.png)
+---
+
+### 📌 Deletar pedido
+
+**DELETE** `/orders/{id}`
+![delete_orders.png](images/orders/delete_orders.png)
+---
+
+## 💳 Pagamentos (`/payments`)
+
+### 📌 Criar pagamento
+
+**POST** `/payments`
+
+```json
+{
+  "orderId": "uuid-do-pedido"
+}
+```
 
 ---
-## 🗄️ Modelo de Banco de Dados
-### Principais Relacionamentos:
 
-- Um Usuário pode ter vários Pedidos
-- Um Pedido possui um Pagamento
-- Um Produto pode ter várias Categorias
-- Produto e Categoria possuem relacionamento Many-to-Many
+### 📌 Listar pagamentos
+
+**GET** `/payments`
 
 ---
-# ▶️ Como Rodar o Projeto
 
-## Clone o projeto em um local:
-```
-git clone https://github.com/seu-usuario/seu-repositorio.git
+### 📌 Buscar por ID
+
+**GET** `/payments/{id}`
+
+---
+
+### 📌 Atualizar pagamento
+
+**PUT** `/payments/{id}`
+
+```json
+{
+  "moment": "2026-03-18"
+}
 ```
 
-## Entre na pasta:
+---
+
+### 📌 Deletar pagamento
+
+**DELETE** `/payments/{id}`
+
+---
+
+## 🗄️ Modelo de Dados
+
+### Principais relacionamentos:
+
+* Um usuário possui vários pedidos
+* Um pedido possui um pagamento
+* Um produto pode ter várias categorias
+* Relação Many-to-Many entre Produto e Categoria
+
+---
+
+## ▶️ Como Rodar o Projeto
+
+### 📌 Clonar repositório
+
+```
+git clone https://github.com/BielVereda/Ecommerce_Aula_BackEnd.git
+```
+
+### 📌 Entrar na pasta
+
 ```
 cd ecommerce
 ```
 
-## Rodar aplicação
+### 📌 Executar aplicação
+
 ```
 ./mvnw spring-boot:run
 ```
 
-## A API estará disponível em:
-```
-http://localhost:8080
-```
+---
 
-## 🧠 Melhorias Futuras:
+## 🧪 Testes
 
-- Implementar autenticação com JWT
-- Adicionar OrderItem
-- Implementar paginação
-- Criar documentação com Swagger
-- Implementar validações com Bean Validation
-- Deploy em produção (Render / Railway / AWS)
+Você pode testar os endpoints utilizando:
+
+* Postman
+* Insomnia
+
+---
+
+## 🧠 Melhorias Futuras
+
+* 🔐 Autenticação com JWT
+* 📦 Implementação de OrderItem (carrinho real)
+* 📄 Documentação com Swagger
+* ⚠️ Tratamento global de exceções
+* 📊 Paginação de dados
+* 🌐 Deploy (Render / Railway / AWS)
+
+---
 
 ## 👨‍💻 Autor
 
-Projeto desenvolvido por BielVereda.
+Desenvolvido por **BielVereda**
+
+---
+
+## ⭐ Considerações Finais
+
+Este projeto foi desenvolvido com foco em aprendizado e boas práticas no desenvolvimento de APIs REST com Spring Boot.
+
+Sinta-se livre para contribuir, melhorar ou utilizar como base para projetos maiores 🚀

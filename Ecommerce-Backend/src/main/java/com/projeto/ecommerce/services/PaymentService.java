@@ -8,7 +8,9 @@ import com.projeto.ecommerce.repositories.PaymentRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PaymentService {
@@ -22,8 +24,21 @@ public class PaymentService {
         this.orderRepository = orderRepository;
     }
 
-    public PaymentDTO create(PaymentDTO dto) {
+    public List<PaymentDTO> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
 
+    public PaymentDTO findById(UUID id) {
+        PaymentEntity entity = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pagamento não encontrado"));
+
+        return toDTO(entity);
+    }
+
+    public PaymentDTO create(PaymentDTO dto) {
         OrderEntity order = orderRepository.findById(dto.orderId())
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
 
@@ -32,6 +47,22 @@ public class PaymentService {
         entity.setOrder(order);
 
         return toDTO(repository.save(entity));
+    }
+
+    public PaymentDTO update(UUID id, PaymentDTO dto) {
+        PaymentEntity entity = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pagamento não encontrado"));
+
+        entity.setMoment(dto.moment());
+
+        return toDTO(repository.save(entity));
+    }
+
+    public void delete(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new RuntimeException("Pagamento não encontrado");
+        }
+        repository.deleteById(id);
     }
 
     private PaymentDTO toDTO(PaymentEntity entity) {

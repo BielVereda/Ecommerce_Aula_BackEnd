@@ -39,7 +39,19 @@ public class CategoryService {
         return toDTO(repository.save(entity));
     }
 
+    public CategoryDTO update(UUID id, CategoryDTO dto) {
+        CategoryEntity entity = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+
+        entity.setName(dto.name());
+
+        return toDTO(repository.save(entity));
+    }
+
     public void delete(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new RuntimeException("Categoria não encontrada");
+        }
         repository.deleteById(id);
     }
 
