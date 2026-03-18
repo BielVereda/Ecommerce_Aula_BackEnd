@@ -138,7 +138,7 @@ com.projeto.ecommerce
 
 ## Clone o projeto em um local:
 ```
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/BielVereda/Ecommerce_Aula_BackEnd.git
 ```
 
 ## Entre na pasta:
@@ -153,7 +153,7 @@ cd ecommerce
 
 ## A API estará disponível em:
 ```
-http://localhost:8080
+http://localhost:8080/
 ```
 
 ## 🧠 Melhorias Futuras:
@@ -167,4 +167,4 @@ http://localhost:8080
 
 ## 👨‍💻 Autor
 
-Projeto desenvolvido por BielVereda.
+Projeto desenvolvido por **BielVereda**.
