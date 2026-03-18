@@ -257,19 +257,19 @@ http://localhost:8080
   "orderId": "uuid-do-pedido"
 }
 ```
-
+![post_payments.png](images/payments/post_payments.png)
 ---
 
 ### 📌 Listar pagamentos
 
 **GET** `/payments`
-
+![get_payments.png](images/payments/get_payments.png)
 ---
 
 ### 📌 Buscar por ID
 
 **GET** `/payments/{id}`
-
+![get_payments_id.png](images/payments/get_payments_id.png)
 ---
 
 ### 📌 Atualizar pagamento
@@ -281,13 +281,13 @@ http://localhost:8080
   "moment": "2026-03-18"
 }
 ```
-
+![put_payments_id.png](images/payments/put_payments_id.png)
 ---
 
 ### 📌 Deletar pagamento
 
 **DELETE** `/payments/{id}`
-
+![delete_payments.png](images/payments/delete_payments.png)
 ---
 
 ## 🗄️ Modelo de Dados
