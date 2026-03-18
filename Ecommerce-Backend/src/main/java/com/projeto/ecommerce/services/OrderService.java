@@ -5,13 +5,13 @@ import com.projeto.ecommerce.entities.OrderEntity;
 import com.projeto.ecommerce.entities.UserEntity;
 import com.projeto.ecommerce.repositories.OrderRepository;
 import com.projeto.ecommerce.repositories.UserRepository;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Service;
-import java.time.LocalDate;
 
-@Getter
-@Setter
+import java.time.LocalDate;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Service
 public class OrderService {
 
@@ -24,8 +24,21 @@ public class OrderService {
         this.userRepository = userRepository;
     }
 
-    public OrderDTO create(OrderDTO dto) {
+    public List<OrderDTO> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
 
+    public OrderDTO findById(UUID id) {
+        OrderEntity entity = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+
+        return toDTO(entity);
+    }
+
+    public OrderDTO create(OrderDTO dto) {
         UserEntity user = userRepository.findById(dto.clientId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
@@ -35,6 +48,28 @@ public class OrderService {
         entity.setClient(user);
 
         return toDTO(repository.save(entity));
+    }
+
+    public OrderDTO update(UUID id, OrderDTO dto) {
+        OrderEntity entity = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+
+        entity.setStatus(dto.status());
+
+        if (dto.clientId() != null) {
+            UserEntity user = userRepository.findById(dto.clientId())
+                    .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+            entity.setClient(user);
+        }
+
+        return toDTO(repository.save(entity));
+    }
+
+    public void delete(UUID id) {
+        if (!repository.existsById(id)) {
+            throw new RuntimeException("Pedido não encontrado");
+        }
+        repository.deleteById(id);
     }
 
     private OrderDTO toDTO(OrderEntity entity) {
