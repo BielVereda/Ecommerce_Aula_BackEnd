@@ -48,15 +48,20 @@ com.projeto.ecommerce
 
 ## 🌐 Base URL
 
-Local
+**Local**
 ```
 http://localhost:8080/
 ```
 
-API
+---
+**API**
 ```
 https://ecommercevereda.azurewebsites.net/
 ```
+**Teste API:**
+
+<img width="580" height="248" alt="image" src="https://github.com/user-attachments/assets/55a45304-012d-4e87-96e4-96cb5ec168a4" />
+
 ---
 
 # 🔎 Endpoints da API (Local)
