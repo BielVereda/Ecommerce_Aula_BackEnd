@@ -48,13 +48,18 @@ com.projeto.ecommerce
 
 ## 🌐 Base URL
 
+Local
 ```
-http://localhost:8080
+http://localhost:8080/
 ```
 
+API
+```
+https://ecommercevereda.azurewebsites.net/
+```
 ---
 
-# 🔎 Endpoints da API
+# 🔎 Endpoints da API (Local)
 
 ---
 
