@@ -33,4 +33,6 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "client")
     private List<OrderEntity> orders = new ArrayList<>();
+
+    private String photo;
 }
